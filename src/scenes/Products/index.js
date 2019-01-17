@@ -1,11 +1,19 @@
-import React, {Component} from 'react'
+import React from 'react'
+import { connect } from 'react-redux'
 
-class Products extends Component {
+class Products extends React.Component {
   render () {
     return (
       <div>content</div>
     )
   }
 }
+const mapStateToProps = (state, ownProps) => {
+  return {}
+}
 
-export default Products
+const mapDispatchToProps = (dispatch) => {
+  return {}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Products)
