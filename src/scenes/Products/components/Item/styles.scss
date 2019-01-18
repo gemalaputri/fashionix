@@ -55,25 +55,38 @@ ul {
     }
     /* end product picture */
     #{&}__status {
+      display: flex;
       padding: 20px 15px 25px;
+    }
+    .status__button {
+      padding: 18px 20px;
+      color: #ffffff;
+      font-size: 16px;
+      @at-root {
+        #{&}--sale { /* red */
+          background-color: #cc3333;
+        }
+        #{&}--exclusive { /* green */
+          background-color: #009900;
+        }
+      }
     }
     /* product description */
     #{&}__desc {
-      @extend .flex;
-      @extend .flex-between;
+      @extend .horizontal-item--between;
       font-size: 12px;
       padding: 20px 15px 25px;
     }
     .desc-name {
-      font-size: 14px;
-      line-height: 24px;
-      font-weight: 500;
+      font-size: 24px;
+    }
+    .desc-price {
+      font-size: 36px;
     }
     /* end product description */
   }
 }
 /* end product item */
-
 @media (min-width: 400px) and (max-width: 660px - 1px) {
   .product-item {
     border-right-width: 1px;

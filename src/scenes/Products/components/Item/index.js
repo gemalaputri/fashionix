@@ -9,7 +9,9 @@ class Item extends Component {
           picture here
         </div>
         <div className="product-item__status">
-          status here
+          <div className="status__button status__button--sale">
+            Sale
+          </div>
         </div>
         <div className="product-item__desc">
           <div className="desc-name">
