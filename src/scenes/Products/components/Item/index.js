@@ -1,24 +1,34 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import './styles.scss'
 
 class Item extends Component {
   render () {
+    const {
+      isSale,
+      isExclusive,
+      price,
+      productImage,
+      productName,
+      size
+    } = this.props
+
     return (
       <li className="product-item product-item--border">
         <div className="product-item__picture">
-          picture here
+          image here
         </div>
         <div className="product-item__status">
-          <div className="status__button status__button--sale">
-            Sale
+          <div className={`status__button status__button${isSale? '--sale' : ''}${isExclusive? '--exclusive': ''}`}>
+            {isSale? 'sale': ''}
+            {isExclusive? 'Exclusive': ''}
           </div>
         </div>
         <div className="product-item__desc">
           <div className="desc-name">
-            Product Name
+            {productName}
           </div>
           <div className="desc-price">
-            Price
+            {price}
           </div>
         </div>
       </li>
