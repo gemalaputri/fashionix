@@ -1,19 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import ProductList from './components/List/index'
+import './styles.scss'
 
 class Products extends React.Component {
   render () {
     return (
-      <div>content</div>
+      <div className="container">
+        <ProductList />
+      </div>
     )
   }
 }
-const mapStateToProps = (state, ownProps) => {
-  return {}
-}
 
-const mapDispatchToProps = (dispatch) => {
-  return {}
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Products)
+export default Products

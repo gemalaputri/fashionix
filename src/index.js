@@ -6,6 +6,7 @@ import { Route } from 'react-router-dom'
 import { ConnectedRouter } from 'react-router-redux'
 import history from './dependencies/history'
 import configureStore from './store/configureStore'
+import './styles/index.scss'
 
 import Products from './scenes/Products'
 
