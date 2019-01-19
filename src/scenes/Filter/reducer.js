@@ -14,9 +14,9 @@ const initFilterData = fromJS({
 export function productsFilterData(state = initFilterData, action) {
   switch (action.type) {
     case "PRODUCTS_FILTER_SORT_BY_SIZE":
-      return fromJS(action.size)
+      return state.set('size', action.size)
     case "PRODUCTS_FILTER_SORT_BY_PRICE":
-      return fromJS(action.price)
+      return state.set('price', action.price)
     case "PRODUCTS_CLEAR_FILTER_DATA":
       return fromJS({
         size: false,

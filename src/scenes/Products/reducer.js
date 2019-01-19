@@ -9,3 +9,12 @@ export function products(state = Map({}), action) {
       return state
   }
 }
+
+export function productsIndexes(state = Map({}), action) {
+  switch (action.type) {
+    case "ADD_FILTERED_PRODUCTS":
+        return fromJS(action.indexes)
+    default:
+      return state
+  }
+}

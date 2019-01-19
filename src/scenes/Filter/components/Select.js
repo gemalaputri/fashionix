@@ -1,4 +1,11 @@
 import React, {Component} from 'react'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
+import {
+  productsFilterBySize,
+  productsFilterByPrice,
+  productsClearFilterData,
+} from '../actions'
 
 class Select extends Component {
   constructor(props) {
@@ -10,9 +17,30 @@ class Select extends Component {
   }
 
   handleChangeFilter = (e) => {
+    const {
+      productsFilterBySize,
+      productsFilterByPrice,
+      productsClearFilterData
+    } = this.props
+
     this.setState({
       selectedFilter: e.target.value,
     })
+
+    if(e.target.value === 'size') {
+      productsClearFilterData()
+      .then(() => {
+        productsFilterBySize(true)
+      })
+    } else if(e.target.value === 'price') {
+      productsClearFilterData()
+      .then(() => {
+        productsFilterByPrice(true)
+      })
+    } else {
+      productsClearFilterData()
+      console.log("clear");
+    }
   }
 
   render () {
@@ -26,4 +54,19 @@ class Select extends Component {
   }
 }
 
-export default Select
+const mapStateToProps  = (state) => {
+  return {
+    productsFilterData: state.productsFilterData
+  }
+}
+
+const mapDispatchToProps  = (dispatch) => {
+  return {
+    productsFilterBySize: (size) => dispatch(productsFilterBySize(size)),
+    productsFilterByPrice: (price) => dispatch(productsFilterByPrice(price)),
+    productsClearFilterData: () => dispatch(productsClearFilterData()),
+  }
+}
+
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Select))

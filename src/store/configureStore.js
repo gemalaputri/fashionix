@@ -1,7 +1,8 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import { routerMiddleware } from 'react-router-redux'
 import history from '../dependencies/history'
-import { products } from '../scenes/Products/reducer'
+import thunk from 'redux-thunk'
+import { products, productsIndexes } from '../scenes/Products/reducer'
 import { productsFilterData } from '../scenes/Filter/reducer'
 
 let composeEnhancers = compose
@@ -13,6 +14,7 @@ if (process.env.NODE_ENV === 'development') {
 const rootReducer = combineReducers({
   products,
   productsFilterData,
+	productsIndexes
 });
 
 export default function configureStore(initialState) {
@@ -23,6 +25,7 @@ export default function configureStore(initialState) {
     initialState,
     composeEnhancers(applyMiddleware(
       _routerMiddleware,
+			thunk
     ))
   );
 
