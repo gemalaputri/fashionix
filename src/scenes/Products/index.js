@@ -1,6 +1,5 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import ProductList from './components/List/index'
+import ProductList from './components/Lists/index'
 import Filter from '../Filter'
 import './styles.scss'
 

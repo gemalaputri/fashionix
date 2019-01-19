@@ -57,6 +57,7 @@ ul {
     #{&}__status {
       display: flex;
       padding: 20px 15px 25px;
+      height: 54px;
     }
     .status__button {
       padding: 18px 20px;
@@ -83,6 +84,7 @@ ul {
     }
     .desc-price {
       font-size: 36px;
+      @extend .align-self-start;
     }
     /* end product description */
   }
