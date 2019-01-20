@@ -9,13 +9,12 @@ class Item extends Component {
       price,
       productImage,
       productName,
-      size
     } = this.props
 
     return (
       <li className="product-item product-item--border">
         <div className="product-item__picture">
-          image here
+          <img src={require(`../../../../images/Products/${productImage}`)} alt="" />
         </div>
         <div className="product-item__status">
           <div className={`status__button status__button${isSale? '--sale' : ''}${isExclusive? '--exclusive': ''}`}>

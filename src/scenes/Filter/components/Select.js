@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
-import { Map, List, fromJS } from 'immutable'
+import { fromJS } from 'immutable'
 import {
   productsFilterBySize,
   productsFilterByPrice,
@@ -73,18 +73,18 @@ class Select extends Component {
         sort: _sort
       })
     })
-    {/* we take the first string of size
+    /* we take the first string of size
       * check the string and give the number based our sizeChart
       * create new object contain the "product id" and number of sizeChart in "sort" key
       * the _sortable object is not sorted yet
-      */}
+      */
     const result = _sortable.sort(function(a,b){return a.get('sort')-b.get('sort')}) //sorted _sortable
 
     addFilteredProducts(result) // dispatch to be productsIndexes
     .then(() => {
       let _productFiltered = [] // new array for sorted product
-      const _productsIndexes = this.props.productsIndexes.map( key => {
-        const _products = products.filter( item => {
+      this.props.productsIndexes.map( key => (
+        products.filter( item => {
           if(item.get('index') === key.get('index')) {
             _productFiltered.push(item)
             return false
@@ -92,13 +92,13 @@ class Select extends Component {
             return true
           }
         }).first()
-      })
-      {/* we already have productsIndexes with "product id as index"
+      ))
+      /* we already have productsIndexes with "product id as index"
         * filter existing/old products with mapping it first
         * check if the existing product id is equal to product id in productsIndexes
         * then push the product content to new array of products
         * we sorted new products by productsIndexes.
-        */}
+        */
 
       fetchProducts(fromJS(_productFiltered))
       // dispatch new products by productsIndexes to replace existing products

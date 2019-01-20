@@ -32,13 +32,13 @@ export function restructureAllProducts(products) {
           index: product.index,
           isSale: product.isSale,
           isExclusive: product.isExclusive,
-          price: parseFloat(removeRegexCharacter(product.price)),
+          price: parseFloat(removeRegexCharacter(product.price)), //convert string to float and remove all char
           productImage: product.productImage,
           productName: product.productName,
           size: product.size,
         }
       })
-      dispatch(fetchProducts(_products))
+      dispatch(fetchProducts(_products)) //dispatch restructured data to process in reducer
     })
   }
 }

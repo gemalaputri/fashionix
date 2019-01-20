@@ -1,11 +1,9 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
-import { Map, List, fromJS } from 'immutable'
-import sortBy from 'lodash/sortBy'
 import ProductItem from '../Item/index'
 import productsData from '../../../../services/data/products.json' //excisting json data
-import { fetchProducts, restructureAllProducts } from '../../actions' //get actions from
+import { restructureAllProducts } from '../../actions' //get actions from
 
 
 
@@ -19,7 +17,7 @@ class Lists extends Component {
   }
 
   componentDidMount() {
-    const { fetchProducts, restructureAllProducts } = this.props
+    const { restructureAllProducts } = this.props
     restructureAllProducts(productsData) //fetch data from json named productsData, process to reducer
 
     this.setState({isLoading: false}) //deactivate loading bar
@@ -36,13 +34,13 @@ class Lists extends Component {
             !this.props.products.isEmpty() &&
             products && products.map((product) => (
               <ProductItem //we post some props to component target
-              key={product.get('index')}
-              isSale={product.get('isSale')}
-              isExclusive={product.get('isExclusive')}
-              price={`$${product.get('price')}`}
-              productImage={product.get('productImage')}
-              productName={product.get('productName')}
-              size={product.get('size')} />
+                key={product.get('index')}
+                isSale={product.get('isSale')}
+                isExclusive={product.get('isExclusive')}
+                price={`$${product.get('price')}`}
+                productImage={product.get('productImage')}
+                productName={product.get('productName')}
+              />
             ))
           }
           {isLoading &&
@@ -62,8 +60,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchProducts: (products) => dispatch(fetchProducts(products)), //activate fetchProducts from actions for update redux state
     restructureAllProducts: (products) => dispatch(restructureAllProducts(products))
+    //fetch Products from actions for update redux state for the first init
   }
 }
 
