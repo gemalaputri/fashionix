@@ -42,6 +42,9 @@ class Select extends Component {
       productsClearFilterData()
       .then(() => {
         productsFilterByPrice(true)
+        .then(() => {
+          this.handleChangeFilterPrice() //call the function to sorting the products by price
+        })
       })
     } else {
       productsClearFilterData()
@@ -100,6 +103,14 @@ class Select extends Component {
       fetchProducts(fromJS(_productFiltered))
       // dispatch new products by productsIndexes to replace existing products
     })
+  }
+
+  handleChangeFilterPrice = () => {
+    const { fetchProducts } = this.props
+
+    const _products = this.props.products.sort(function(a,b){return a.get('price')-b.get('price')})
+
+    fetchProducts(_products) //dispatch to products
   }
 
   render () {

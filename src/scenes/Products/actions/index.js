@@ -1,5 +1,6 @@
 import Promise from 'bluebird'
 import { FETCH_PRODUCTS, ADD_FILTERED_PRODUCTS } from "./action-types"
+import { removeRegexCharacter } from '../../../helpers/global'
 
 export function fetchProducts(products){
   return {
@@ -21,4 +22,23 @@ export function addFilteredProducts(indexes) {
 			resolve(dispatch(addFilteredProductsSuccess(indexes)))
 		})
 	}
+}
+
+export function restructureAllProducts(products) {
+  return (dispatch) => {
+		return new Promise((resolve, reject) => {
+      const _products = products.map((product) => {
+        return {
+          index: product.index,
+          isSale: product.isSale,
+          isExclusive: product.isExclusive,
+          price: parseFloat(removeRegexCharacter(product.price)),
+          productImage: product.productImage,
+          productName: product.productName,
+          size: product.size,
+        }
+      })
+      dispatch(fetchProducts(_products))
+    })
+  }
 }
