@@ -1,17 +1,20 @@
 import Promise from 'bluebird'
-import { FETCH_PRODUCTS, ADD_FILTERED_PRODUCTS } from "./action-types"
+import {
+  FETCH_PRODUCTS,
+  ADD_FILTERED_PRODUCTS
+} from './action-types'
 import { removeRegexCharacter } from '../../../helpers/global'
 
 export function fetchProducts(products){
   return {
-      type: "FETCH_PRODUCTS",
+      type: FETCH_PRODUCTS,
       products
   }
 }
 
 export function addFilteredProductsSuccess(indexes){
   return {
-      type: "ADD_FILTERED_PRODUCTS",
+      type: ADD_FILTERED_PRODUCTS,
       indexes
   }
 }

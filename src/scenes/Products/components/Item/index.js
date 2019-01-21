@@ -1,7 +1,17 @@
+//@flow
+
 import React, { Component } from 'react'
 import './styles.scss'
 
-class Item extends Component {
+type Props = {
+  isSale: boolean,
+  isExclusive: boolean,
+  price: string,
+  productImage: string,
+  productName: string,
+}
+
+class Item extends Component<Props> {
   render () {
     const {
       isSale,

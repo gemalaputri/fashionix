@@ -3,25 +3,25 @@ import {
   PRODUCTS_FILTER_SORT_BY_SIZE,
   PRODUCTS_FILTER_SORT_BY_PRICE,
   PRODUCTS_CLEAR_FILTER_DATA
-  } from "./action-types"
+} from './action-types'
 
 export function productsFilterBySizeSuccess(size){
   return {
-      type: "PRODUCTS_FILTER_SORT_BY_SIZE", //filter by size
+      type: PRODUCTS_FILTER_SORT_BY_SIZE, //filter by size
       size
   }
 }
 
 export function productsFilterByPriceSuccess(price){
   return {
-      type: "PRODUCTS_FILTER_SORT_BY_PRICE", //filter by price
+      type: PRODUCTS_FILTER_SORT_BY_PRICE, //filter by price
       price
   }
 }
 
 export function productsClearFilterDataSuccess(){
   return {
-      type: "PRODUCTS_CLEAR_FILTER_DATA", //clear filter
+      type: PRODUCTS_CLEAR_FILTER_DATA, //clear filter
   }
 }
 

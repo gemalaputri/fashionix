@@ -24,6 +24,11 @@ Responsive Layout
 ### Build dropdown filters from data
 Hide and show data depending on the dropdown filters
 
+### Type checker with Flow
+Reference: flow.org
+Flow is a static type checker that catches common errors in your application before they run.
+run on your terminal with `flow` in your project directory
+
 Here is the preview
 ----
 

@@ -1,7 +1,9 @@
+// @flow
+
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
-import { fromJS } from 'immutable'
+import { Map, fromJS } from 'immutable'
 import {
   productsFilterBySize,
   productsFilterByPrice,
@@ -9,7 +11,22 @@ import {
 } from '../actions'
 import { fetchProducts, addFilteredProducts } from '../../Products/actions' //get actions from
 
-class Select extends Component {
+type Props = {
+  products: Map<string, any>,
+  productsFilterData: Map<string, any>,
+  productsIndexes: Map<string, any>,
+  fetchProducts: Function,
+  addFilteredProducts: Function,
+  productsFilterBySize: Function,
+  productsFilterByPrice: Function,
+  productsClearFilterData: Function,
+};
+
+type State = {
+  selectedFilter: string,
+}
+
+class Select extends Component<Props, State> {
   constructor(props) {
     super(props)
 
@@ -57,7 +74,7 @@ class Select extends Component {
   handleChangeClearFilter = () => {
     const { fetchProducts } = this.props
 
-    const _products = this.props.products.sort(function(a,b){return a.get('index')-b.get('index')})
+    const _products = this.props.products.sort((a,b) => { return a.get('index')-b.get('index')} )
 
     fetchProducts(_products) //dispatch to products
   }
@@ -78,7 +95,7 @@ class Select extends Component {
       * create new object contain the "product id" and number of sizeChart in "sort" key
       * the _sortable object is not sorted yet
       */
-    const result = _sortable.sort(function(a,b){return a.get('sort')-b.get('sort')}) //sorted _sortable
+    const result = _sortable.sort((a,b) => { return a.get('sort')-b.get('sort') }) //sorted _sortable
 
     addFilteredProducts(result) // dispatch to be productsIndexes
     .then(() => {
@@ -108,14 +125,14 @@ class Select extends Component {
   handleChangeFilterPrice = () => {
     const { fetchProducts } = this.props
 
-    const _products = this.props.products.sort(function(a,b){return a.get('price')-b.get('price')})
+    const _products = this.props.products.sort((a,b) => { return a.get('price')-b.get('price') })
 
     fetchProducts(_products) //dispatch to products
   }
 
   render () {
     return (
-      <select onChange={this.handleChangeFilter} value={this.selectedFilter}>
+      <select onChange={this.handleChangeFilter} value={this.state.selectedFilter}>
         <option value="">Filter by</option>
         <option value="size">Filter by size</option>
         <option value="price">Filter by price</option>
@@ -134,11 +151,11 @@ const mapStateToProps  = (state) => {
 
 const mapDispatchToProps  = (dispatch) => {
   return {
-    productsFilterBySize: (size) => dispatch(productsFilterBySize(size)),
-    productsFilterByPrice: (price) => dispatch(productsFilterByPrice(price)),
-    productsClearFilterData: () => dispatch(productsClearFilterData()),
-    fetchProducts: (products) => dispatch(fetchProducts(products)), //activate fetchProducts from actions for update redux state
-    addFilteredProducts: (indexes) => dispatch(addFilteredProducts(indexes)),
+    productsFilterBySize: (size) => dispatch(productsFilterBySize(size)), //dispatch `productsFilterData.size` set true
+    productsFilterByPrice: (price) => dispatch(productsFilterByPrice(price)), //dispatch `productsFilterData.price` set true
+    productsClearFilterData: () => dispatch(productsClearFilterData()), //dispatch clear filter data `productsFilterData.size and productsFilterData.price` set true
+    fetchProducts: (products) => dispatch(fetchProducts(products)), //dispatch `products`
+    addFilteredProducts: (indexes) => dispatch(addFilteredProducts(indexes)), //dispatch indexes filter product
   }
 }
 

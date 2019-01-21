@@ -1,13 +1,24 @@
+// @flow
+
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
+import isEmpty from 'lodash/isEmpty'
+import { Map } from 'immutable'
 import ProductItem from '../Item/index'
 import productsData from '../../../../services/data/products.json' //excisting json data
 import { restructureAllProducts } from '../../actions' //get actions from
 
+type Props = {
+  products: Map<string, any>,
+  restructureAllProducts: Function,
+};
 
+type State = {
+  isLoading: boolean
+}
 
-class Lists extends Component {
+class Lists extends Component<Props, State> {
   constructor(props) {
     super(props)
 
@@ -30,10 +41,10 @@ class Lists extends Component {
     return (
       <div className="content">
         <ul className="product-list">
-          { //mapping products list if products is not empty
-            !this.props.products.isEmpty() &&
+          { //mapping products list if products is not empty, giving react props to children
+            !isEmpty(products) &&
             products && products.map((product) => (
-              <ProductItem //we post some props to component target
+              <ProductItem
                 key={product.get('index')}
                 isSale={product.get('isSale')}
                 isExclusive={product.get('isExclusive')}
@@ -41,7 +52,7 @@ class Lists extends Component {
                 productImage={product.get('productImage')}
                 productName={product.get('productName')}
               />
-            ))
+          )).valueSeq().toArray()
           }
           {isLoading &&
             <div>Loading...</div> //it will show while products data is empty
